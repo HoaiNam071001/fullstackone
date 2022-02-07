@@ -5,7 +5,7 @@ const route = require('./routes');
 // const fileUpload = require('express-fileupload');
 // const session = require('express-session');
 // const cookieParser = require('cookie-parser');
-// const path = require('path');
+const path = require('path');
 
 
 // app.use(cookieParser());
@@ -25,8 +25,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 route(app);
+app.use(express.static(path.resolve(__dirname, '../font-end/build')));
 
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../font-end/build', 'index.html'));
+});
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.listen(process.env.PORT || port, () => {
+  console.log(`Example app listening on port ${process.env.PORT || port}`)
 })
