@@ -9,7 +9,7 @@ function Tool() {
   const submitID = async ()=>{
     await axios({
       method: 'POST',
-      url: 'http://localhost:3060/register',
+      url: '/register',
       data: {
         username: name,
         password: pass
